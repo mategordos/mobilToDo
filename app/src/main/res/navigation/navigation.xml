@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/toDoViewerFragment">
+
+    <fragment
+        android:id="@+id/toDoViewerFragment"
+        android:name="com.example.myapplication.todoviewer.ToDoViewerFragment"
+        android:label="ToDoViewerFragment" >
+        <action
+            android:id="@+id/action_toDoViewerFragment_to_toDoCreatorFragment"
+            app:destination="@id/toDoCreatorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/toDoCreatorFragment"
+        android:name="com.example.myapplication.todocreator.ToDoCreatorFragment"
+        android:label="ToDoCreatorFragment" >
+        <action
+            android:id="@+id/action_toDoCreatorFragment_to_toDoViewerFragment"
+            app:destination="@id/toDoViewerFragment" />
+    </fragment>
+</navigation>
