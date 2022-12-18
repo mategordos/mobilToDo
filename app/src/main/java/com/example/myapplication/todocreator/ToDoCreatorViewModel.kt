@@ -1,8 +1,8 @@
 package com.example.myapplication.todocreator
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 
 class ToDoCreatorViewModel : ViewModel() {
     val _navigateToToDoViewer = MutableLiveData<Boolean>()
@@ -11,6 +11,20 @@ class ToDoCreatorViewModel : ViewModel() {
         get() =_navigateToToDoViewer
 
     fun onCancel() {
+        viewModelScope.launch {
         _navigateToToDoViewer.value = true
+        }
     }
+    fun onOkButtonClicked(toDoName: String) {
+        if (toDoName.isEmpty())
+        {
+            return
+        }
+
+        viewModelScope.launch {
+            _navigateToToDoViewer.value = true
+        }
+
+    }
+
 }

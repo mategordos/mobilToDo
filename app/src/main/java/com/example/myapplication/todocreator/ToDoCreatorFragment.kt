@@ -1,22 +1,21 @@
 package com.example.myapplication.todocreator
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
-import com.example.myapplication.database.ToDoDatabase
 import com.example.myapplication.databinding.FragmentTodoCreatorBinding
-import com.example.myapplication.todoviewer.ToDoViewerFragmentDirections
-import com.example.myapplication.todoviewer.ToDoViewerViewModel
-import com.example.myapplication.todoviewer.ToDoViewerViewModelFactory
 
 class ToDoCreatorFragment : Fragment() {
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +36,11 @@ class ToDoCreatorFragment : Fragment() {
             if (it == true){
                 this.findNavController().navigate(ToDoCreatorFragmentDirections.actionToDoCreatorFragmentToToDoViewerFragment())
             }
+        }
+
+        binding.todoOkButton.setOnClickListener{
+            val toDoName = binding.textField1.toString()
+            toDoCreatorViewModel.onOkButtonClicked(toDoName)
         }
 
         return binding.root

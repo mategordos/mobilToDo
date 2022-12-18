@@ -13,16 +13,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/enter_the_name_of_the_task" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@string/todoCancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
+            android:text="@string/cancel"
             app:srcCompat="@android:drawable/ic_input_add"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textField1"
             android:layout_margin="16dp"
             android:onClick="@{() -> todoCreatorViewModel.onCancel()}"/>
+
+
+        <Button
+            android:id="@string/todoOkButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ok"
+            app:srcCompat="@android:drawable/ic_input_add"
+            app:layout_constraintTop_toBottomOf="@string/todoCancelButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="16dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

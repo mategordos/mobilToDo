@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.database.ToDoDatabaseDao
 
 class ToDoViewerViewModel(
-//    dataSource: ToDoDatabaseDao,
+    dataSource: ToDoDatabaseDao,
     application: Application) : AndroidViewModel(application) {
 
     val _navigateToToDoCreator = MutableLiveData<Boolean>()

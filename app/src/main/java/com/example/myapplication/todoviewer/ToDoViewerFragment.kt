@@ -28,8 +28,8 @@ class ToDoViewerFragment : Fragment() {
         )
 
         val application = requireNotNull(this.activity).application
-//        val dataSource = ToDoDatabase.getInstance(application).todoDatabaseDao
-        val viewModelFactory = ToDoViewerViewModelFactory(application)
+        val dataSource = ToDoDatabase.getInstance(application).todoDatabaseDao
+        val viewModelFactory = ToDoViewerViewModelFactory(dataSource, application)
         val toDoViewerViewModel = ViewModelProvider(this, viewModelFactory).get(ToDoViewerViewModel::class.java)
         binding.lifecycleOwner = this
         binding.todoViewerViewModel = toDoViewerViewModel
