@@ -5,4 +5,7 @@
     <string name="todoOkButton">todoOkButton</string>
     <string name="Ok">ok</string>
     <string name="enter_the_name_of_the_task">Enter the name of the task</string>
+    <string name="priority_1">priority_1</string>
+    <string name="priority_2">priority_2</string>
+    <string name="priority_3">priority_3</string>
 </resources>

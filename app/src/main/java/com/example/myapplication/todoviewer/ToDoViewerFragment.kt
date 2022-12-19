@@ -40,6 +40,17 @@ class ToDoViewerFragment : Fragment() {
             }
         }
 
+        val adapter = ToDoAdapter()
+        binding.todoList.adapter = adapter
+
+        toDoViewerViewModel.allToDos.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.submitList(it)
+            }
+        }
+
+
+
         return binding.root
     }
 

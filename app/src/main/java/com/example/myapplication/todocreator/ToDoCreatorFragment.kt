@@ -12,10 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
+import com.example.myapplication.database.ToDoDatabase
 import com.example.myapplication.databinding.FragmentTodoCreatorBinding
 
 class ToDoCreatorFragment : Fragment() {
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,8 +26,8 @@ class ToDoCreatorFragment : Fragment() {
         )
         val application = requireNotNull(this.activity).application
 
-//        val dataSource = ToDoDatabase.getInstance(application).todoDatabaseDao
-        val viewModelFactory = ToDoCreatorViewModelFactory(application)
+        val dataSource = ToDoDatabase.getInstance(application).todoDatabaseDao
+        val viewModelFactory = ToDoCreatorViewModelFactory(dataSource, application)
         val toDoCreatorViewModel = ViewModelProvider(this, viewModelFactory).get(ToDoCreatorViewModel::class.java)
         binding.lifecycleOwner = this
         binding.todoCreatorViewModel = toDoCreatorViewModel
@@ -36,11 +36,6 @@ class ToDoCreatorFragment : Fragment() {
             if (it == true){
                 this.findNavController().navigate(ToDoCreatorFragmentDirections.actionToDoCreatorFragmentToToDoViewerFragment())
             }
-        }
-
-        binding.todoOkButton.setOnClickListener{
-            val toDoName = binding.textField1.toString()
-            toDoCreatorViewModel.onOkButtonClicked(toDoName)
         }
 
         return binding.root

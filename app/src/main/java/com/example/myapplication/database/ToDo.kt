@@ -11,7 +11,7 @@ data class ToDo(
     @ColumnInfo(name = "nameOfTodo")
     var nameOfTodo: String,
     @ColumnInfo(name = "prioOfTodo")
-    var prioOfTodo: Int = -1,
+    var prioOfTodo: Boolean = false,
     @ColumnInfo(name = "statusOfTodo")
-    var statusOfTodo: Int = -1
+    var statusOfTodo: Boolean = false
 )

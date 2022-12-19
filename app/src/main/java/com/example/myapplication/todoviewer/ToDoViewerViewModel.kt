@@ -1,15 +1,17 @@
 package com.example.myapplication.todoviewer
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.myapplication.database.ToDoDatabaseDao
+import kotlinx.coroutines.launch
 
 class ToDoViewerViewModel(
-    dataSource: ToDoDatabaseDao,
+    private val dataSource: ToDoDatabaseDao,
     application: Application) : AndroidViewModel(application) {
+
+
+    val allToDos = dataSource.getAllTodos()
+
 
     val _navigateToToDoCreator = MutableLiveData<Boolean>()
 
@@ -18,6 +20,12 @@ class ToDoViewerViewModel(
 
     fun onNewTodo() {
         _navigateToToDoCreator.value = true
+    }
+
+    fun onClearAll() {
+        viewModelScope.launch {
+            dataSource.deleteAll()
+        }
     }
 
 }
