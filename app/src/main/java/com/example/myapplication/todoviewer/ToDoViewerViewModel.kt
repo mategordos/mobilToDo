@@ -6,13 +6,14 @@ import androidx.lifecycle.*
 import com.example.myapplication.database.ToDo
 import com.example.myapplication.database.ToDoDatabaseDao
 import kotlinx.coroutines.launch
-
 class ToDoViewerViewModel(
     private val dataSource: ToDoDatabaseDao,
     private val application: Application) : ViewModel() {
 
 
-    val allToDos = dataSource.getAllTodos()
+    val numberOfToDos: LiveData<Int> = Transformations.map(dataSource.getAllTodos()){ data -> data.size}
+
+    var allToDos = dataSource.getAllTodos()
 
     private var status = false
 
@@ -47,3 +48,4 @@ class ToDoViewerViewModel(
     }
 
 }
+

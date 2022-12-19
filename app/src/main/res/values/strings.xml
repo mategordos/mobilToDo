@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">My ToDoApp</string>
     <string name="cancel">Cancel</string>
     <string name="todoCancelButton">todoCancelButton</string>
     <string name="todoOkButton">todoOkButton</string>

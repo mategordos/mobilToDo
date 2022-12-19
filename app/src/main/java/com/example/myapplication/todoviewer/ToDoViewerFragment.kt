@@ -43,6 +43,11 @@ class ToDoViewerFragment : Fragment() {
         val adapter = ToDoAdapter(OnTodoClickListener { todo -> toDoViewerViewModel.onClickTodo(todo)})
         binding.todoList.adapter = adapter
 
+        toDoViewerViewModel.numberOfToDos.observe(viewLifecycleOwner) {
+            binding.numberOfToDos.text = String.format("%s ToDo(s) left to do", it)
+        }
+
+
         toDoViewerViewModel.allToDos.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitList(it)

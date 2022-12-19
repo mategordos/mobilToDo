@@ -27,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.018"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numberOfToDos"
             app:layout_constraintVertical_bias="0.035" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -42,7 +42,7 @@
             android:onClick="@{() -> todoViewerViewModel.onNewTodo()}"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
+            android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -52,6 +52,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:srcCompat="@android:drawable/ic_menu_delete"
             tools:layout_editor_absoluteX="12dp" />
+
+        <TextView
+            android:id="@+id/numberOfToDos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

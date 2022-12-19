@@ -34,7 +34,6 @@ class ToDoAdapter(private val onClickListener: OnTodoClickListener) : ListAdapte
     class ViewHolder private constructor(val binding: SingleTodoItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ToDo) {
-//            val res = itemView.context.resources
             binding.testingtextviewhaha.text = item.nameOfTodo
             binding.importantIndicator.setImageResource(
                 when(item.prioOfTodo){

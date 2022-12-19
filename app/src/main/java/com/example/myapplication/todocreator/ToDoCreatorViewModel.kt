@@ -53,6 +53,7 @@ class ToDoCreatorViewModel(
     fun setImportantFalse() {
         viewModelScope.launch {
             setChecked = false
+            showToast("IMPORTANT IS FALSE")
         }
     }
 
