@@ -1,5 +1,6 @@
 package com.example.myapplication.todoviewer
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,10 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.myapplication.R
 import com.example.myapplication.database.ToDo
 import com.example.myapplication.databinding.SingleTodoItemBinding
+import com.example.myapplication.generated.callback.OnClickListener
+import kotlin.coroutines.coroutineContext
 
-class ToDoAdapter : ListAdapter<ToDo, ToDoAdapter.ViewHolder>(ToDoDiffCallBack()) {
+class ToDoAdapter(private val onClickListener: OnTodoClickListener) : ListAdapter<ToDo, ToDoAdapter.ViewHolder>(ToDoDiffCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
@@ -20,6 +24,9 @@ class ToDoAdapter : ListAdapter<ToDo, ToDoAdapter.ViewHolder>(ToDoDiffCallBack()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(getItem(position))
+        }
         holder.bind(item)
     }
 
@@ -28,8 +35,20 @@ class ToDoAdapter : ListAdapter<ToDo, ToDoAdapter.ViewHolder>(ToDoDiffCallBack()
 
         fun bind(item: ToDo) {
 //            val res = itemView.context.resources
-            binding.testingtextviewhaha.text = item.nameOfTodo + "|||" + item.todoId
+            binding.testingtextviewhaha.text = item.nameOfTodo
+            binding.importantIndicator.setImageResource(
+                when(item.prioOfTodo){
+                    true -> R.drawable.ic_baseline_important_36
+                    else -> R.drawable.ic_baseline_important_invi_36
+                }
+            )
+            if (item.statusOfTodo){
+                binding.testingtextviewhaha.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                binding.testingtextviewhaha.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            }
         }
+
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
@@ -50,4 +69,8 @@ class ToDoDiffCallBack : DiffUtil.ItemCallback<ToDo>() {
         return oldItem == newItem
     }
 
+}
+
+class OnTodoClickListener(val clickListener: (todo: ToDo) -> Unit) {
+    fun onClick(todo: ToDo) = clickListener(todo)
 }

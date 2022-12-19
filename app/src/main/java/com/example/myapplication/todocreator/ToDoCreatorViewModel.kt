@@ -15,8 +15,11 @@ class ToDoCreatorViewModel(
 ) : ViewModel() {
     val _navigateToToDoViewer = MutableLiveData<Boolean>()
 
-
+    var setChecked = false
     val inputData = MutableLiveData<String>()
+
+
+
 
     val navigateToToDoViewer : LiveData<Boolean>
         get() =_navigateToToDoViewer
@@ -33,14 +36,27 @@ class ToDoCreatorViewModel(
             return
         } else {
             viewModelScope.launch {
-                database.insert(ToDo(nameOfTodo = toDoName, prioOfTodo = false, statusOfTodo = false, ))
+                database.insert(ToDo(nameOfTodo = toDoName, prioOfTodo = setChecked, statusOfTodo = false, ))
                 showToast("ToDo successfully added!")
                 _navigateToToDoViewer.value = true
             }
         }
     }
 
-    private fun showToast(str: String) {
+    fun setImportantTrue() {
+        viewModelScope.launch {
+            setChecked = true
+        }
+    }
+
+
+    fun setImportantFalse() {
+        viewModelScope.launch {
+            setChecked = false
+        }
+    }
+
+     fun showToast(str: String) {
         Toast.makeText(this.application, str, Toast.LENGTH_SHORT).show()
     }
 }

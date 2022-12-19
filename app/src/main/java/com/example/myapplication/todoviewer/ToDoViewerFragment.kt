@@ -40,7 +40,7 @@ class ToDoViewerFragment : Fragment() {
             }
         }
 
-        val adapter = ToDoAdapter()
+        val adapter = ToDoAdapter(OnTodoClickListener { todo -> toDoViewerViewModel.onClickTodo(todo)})
         binding.todoList.adapter = adapter
 
         toDoViewerViewModel.allToDos.observe(viewLifecycleOwner) {

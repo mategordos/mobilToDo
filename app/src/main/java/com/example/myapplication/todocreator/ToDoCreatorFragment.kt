@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -37,6 +38,17 @@ class ToDoCreatorFragment : Fragment() {
                 this.findNavController().navigate(ToDoCreatorFragmentDirections.actionToDoCreatorFragmentToToDoViewerFragment())
             }
         }
+
+        binding.importantTask.setOnCheckedChangeListener { importantTask, isChecked ->
+            if (isChecked)
+            {
+                toDoCreatorViewModel.setImportantTrue()
+            } else {
+                toDoCreatorViewModel.setImportantFalse()
+            }
+        }
+
+
 
         return binding.root
     }

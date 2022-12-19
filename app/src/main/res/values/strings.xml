@@ -8,4 +8,5 @@
     <string name="priority_1">priority_1</string>
     <string name="priority_2">priority_2</string>
     <string name="priority_3">priority_3</string>
+    <string name="important_task">Important task</string>
 </resources>
