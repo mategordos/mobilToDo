@@ -3,6 +3,7 @@ package com.example.myapplication.todoviewer
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +58,7 @@ class ToDoAdapter(private val onClickListener: OnTodoClickListener) : ListAdapte
             }
         }
     }
+
 }
 
 class ToDoDiffCallBack : DiffUtil.ItemCallback<ToDo>() {
@@ -67,7 +69,6 @@ class ToDoDiffCallBack : DiffUtil.ItemCallback<ToDo>() {
     override fun areContentsTheSame(oldItem: ToDo, newItem: ToDo): Boolean {
         return oldItem == newItem
     }
-
 }
 
 class OnTodoClickListener(val clickListener: (todo: ToDo) -> Unit) {

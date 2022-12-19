@@ -6,11 +6,12 @@ import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.myapplication.database.ToDo
 import com.example.myapplication.database.ToDoDatabaseDao
+import com.example.myapplication.database.ToDoRepository
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class ToDoCreatorViewModel(
-    val database: ToDoDatabaseDao,
+    val repository: ToDoRepository,
     val application: Application
 ) : ViewModel() {
     val _navigateToToDoViewer = MutableLiveData<Boolean>()
@@ -36,7 +37,7 @@ class ToDoCreatorViewModel(
             return
         } else {
             viewModelScope.launch {
-                database.insert(ToDo(nameOfTodo = toDoName, prioOfTodo = setChecked, statusOfTodo = false, ))
+                repository.insert(ToDo(nameOfTodo = toDoName, prioOfTodo = setChecked, statusOfTodo = false, ))
                 showToast("ToDo successfully added!")
                 _navigateToToDoViewer.value = true
             }

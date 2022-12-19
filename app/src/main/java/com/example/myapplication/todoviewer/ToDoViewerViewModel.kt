@@ -5,15 +5,16 @@ import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.myapplication.database.ToDo
 import com.example.myapplication.database.ToDoDatabaseDao
+import com.example.myapplication.database.ToDoRepository
 import kotlinx.coroutines.launch
 class ToDoViewerViewModel(
-    private val dataSource: ToDoDatabaseDao,
+    private val repository: ToDoRepository,
     private val application: Application) : ViewModel() {
 
 
-    val numberOfToDos: LiveData<Int> = Transformations.map(dataSource.getAllTodos()){ data -> data.size}
+    val numberOfToDos: LiveData<Int> = Transformations.map(repository.getAllTodos()){ data -> data.size}
 
-    var allToDos = dataSource.getAllTodos()
+    var allToDos = repository.getAllTodos()
 
     private var status = false
 
@@ -28,7 +29,7 @@ class ToDoViewerViewModel(
 
     fun onClearAll() {
         viewModelScope.launch {
-            dataSource.deleteAllDone()
+            repository.deleteAllDone()
             showToast("Deleted completed ToDos :)")
         }
     }
@@ -37,8 +38,8 @@ class ToDoViewerViewModel(
         status = todo.statusOfTodo
         status =! status
         viewModelScope.launch {
-            dataSource.update(ToDo(todoId = todo.todoId, nameOfTodo = todo.nameOfTodo,
-                prioOfTodo = todo.prioOfTodo, statusOfTodo = status))
+            repository.update(ToDo(todoId = todo.todoId, nameOfTodo = todo.nameOfTodo,
+                prioOfTodo = todo.prioOfTodo, statusOfTodo =  status))
         }
     }
 

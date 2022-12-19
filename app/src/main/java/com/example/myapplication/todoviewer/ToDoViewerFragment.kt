@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ConcatAdapter
 import com.example.myapplication.R
 import com.example.myapplication.database.ToDoDatabase
 import com.example.myapplication.database.ToDoDatabaseDao
+import com.example.myapplication.database.ToDoRepository
 import com.example.myapplication.databinding.FragmentTodoViewerBinding
 import com.example.myapplication.todocreator.ToDoCreatorFragment
 
@@ -29,7 +31,7 @@ class ToDoViewerFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = ToDoDatabase.getInstance(application).todoDatabaseDao
-        val viewModelFactory = ToDoViewerViewModelFactory(dataSource, application)
+        val viewModelFactory = ToDoViewerViewModelFactory(ToDoRepository(dataSource) , application)
         val toDoViewerViewModel = ViewModelProvider(this, viewModelFactory).get(ToDoViewerViewModel::class.java)
         binding.lifecycleOwner = this
         binding.todoViewerViewModel = toDoViewerViewModel
@@ -40,8 +42,13 @@ class ToDoViewerFragment : Fragment() {
             }
         }
 
+
+        val headerAdapter = HeaderAdapter()
         val adapter = ToDoAdapter(OnTodoClickListener { todo -> toDoViewerViewModel.onClickTodo(todo)})
-        binding.todoList.adapter = adapter
+
+
+        val concatAdapter = ConcatAdapter(headerAdapter, adapter)
+        binding.todoList.adapter = concatAdapter
 
         toDoViewerViewModel.numberOfToDos.observe(viewLifecycleOwner) {
             binding.numberOfToDos.text = String.format("%s ToDo(s) left to do", it)

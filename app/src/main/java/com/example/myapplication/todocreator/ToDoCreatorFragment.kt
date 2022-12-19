@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.database.ToDoDatabase
+import com.example.myapplication.database.ToDoRepository
 import com.example.myapplication.databinding.FragmentTodoCreatorBinding
 
 class ToDoCreatorFragment : Fragment() {
@@ -28,7 +29,7 @@ class ToDoCreatorFragment : Fragment() {
         val application = requireNotNull(this.activity).application
 
         val dataSource = ToDoDatabase.getInstance(application).todoDatabaseDao
-        val viewModelFactory = ToDoCreatorViewModelFactory(dataSource, application)
+        val viewModelFactory = ToDoCreatorViewModelFactory(ToDoRepository(dataSource) , application)
         val toDoCreatorViewModel = ViewModelProvider(this, viewModelFactory).get(ToDoCreatorViewModel::class.java)
         binding.lifecycleOwner = this
         binding.todoCreatorViewModel = toDoCreatorViewModel
