@@ -26,6 +26,6 @@ Az alábbi mobilapplikáció egy egyszerű ToDo alkalmazás, melyben a mobilalka
 
 [X] RecyclerView Header helyes használata
 
-[] Webes szolgáltatástól történő adat elkérése és megjelenítése
+[ ] Webes szolgáltatástól történő adat elkérése és megjelenítése
 
 [X] Repository pattern használata (Réteg a viewmodel és a database - internet közé)
